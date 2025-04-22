@@ -37,7 +37,14 @@ func (ce *CommandExecutor) AddRawCommand(name string, args ...string) error {
 
 func (ce *CommandExecutor) ExecuteCommands() error {
 	for index, command := range ce.commands {
-		fmt.Printf("Executing Command %s - %d/%d\n", command.name, index+1, len(ce.commands))
+		fmt.Printf("Executing %d/%d - %s ", index+1, len(ce.commands), command.name)
+
+		for _, arg := range command.args {
+			fmt.Printf("%s ", arg)
+		}
+
+		fmt.Printf("\n")
+
 		err := command.execute(command.args)
 
 		if err != nil {

@@ -14,20 +14,46 @@ var projectDir string = "test-project"
 
 func CreateNodeTsProject() bool {
 	directoryPath := filepath.Join(playground, projectDir)
+	rootDir, getWdErr := os.Getwd()
+
+	if getWdErr != nil {
+		fmt.Printf("Error getting the current directory. Error: %s\n", getWdErr)
+		return true
+	}
+
 	executor := commands.NewCommandExecutor()
 
 	executor.AddCommand("mkdir", directoryPath, "0755")
 	executor.AddCommand("cd", directoryPath)
 	executor.AddRawCommand("npm", "init", "-y")
-	executor.AddRawCommand("npm", "install", "express", "dotenv", "cookie-parser", "tsconfig-paths", "cors", "express-session")
+	executor.AddRawCommand("npm", "install", "express", "dotenv", "cookie-parser", "tsconfig-paths", "cors", "express-session", "moment")
 	executor.AddRawCommand("npm", "install", "@types/node", "@types/express", "ts-node", "typescript", "nodemon", "@types/cors", "@types/cookie-parser", "@types/express-session")
 	executor.AddCommand("mkdir", "src", "0755")
 	executor.AddCommand("mkdir", "uploads", "0755")
-	executor.AddCommand("cp", "../../templates/index.ts", "src/index.ts")
-	executor.AddCommand("cp", "../../templates/tsconfig.txt", "tsconfig.json")
-	executor.AddCommand("json-update", "package.json", "scripts", "{\"start\": \"node src/index.ts\", \"dev\": \"nodemon --exec ts-node src/index.ts\"}")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/index.ts"), "src/index.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/tsconfig.txt"), "tsconfig.json", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("json-update", "package.json", "--data", "scripts", "{\"start\": \"node src/index.ts\", \"dev\": \"nodemon --exec ts-node src/index.ts\"}")
+	executor.AddCommand("mkdir", "src/middlewares", "0755")
+	executor.AddCommand("mkdir", "src/data", "0755")
+	executor.AddCommand("mkdir", "src/services", "0755")
+	executor.AddCommand("mkdir", "src/settings", "0755")
+	executor.AddCommand("mkdir", "src/types", "0755")
+	executor.AddCommand("mkdir", "src/types/errors", "0755")
+	executor.AddCommand("mkdir", "src/types/generic", "0755")
+	executor.AddCommand("mkdir", "src/routes", "0755")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/middlewares/error-handler.ts"), "src/middlewares/error-handler.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/middlewares/request-logger.ts"), "src/middlewares/request-logger.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/data/DateFormats.ts"), "src/data/DateFormats.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/services/ErrorService.ts"), "src/services/ErrorService.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/services/Logger.ts"), "src/services/Logger.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/settings/errors-config.ts"), "src/settings/errors-config.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/types/errors/APIError.ts"), "src/types/errors/APIError.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/types/errors/ErrorResponse.ts"), "src/types/errors/ErrorResponse.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/types/generic/ApiResponse.ts"), "src/types/generic/ApiResponse.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/types/generic/ValidationResult.ts"), "src/types/generic/ValidationResult.ts", "--replace", "// @ts-nocheck", "")
+	executor.AddCommand("cp", filepath.Join(rootDir, "templates/node/routes/index.ts"), "src/routes/index.ts", "--replace", "// @ts-nocheck", "")
 
-	executor.AddCommand("cd", "../..")
+	executor.AddCommand("cd", rootDir)
 
 	err := executor.ExecuteCommands()
 

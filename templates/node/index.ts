@@ -7,6 +7,10 @@ import bodyParser from 'body-parser';
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import path from "path";
+import baseRoute from "@routes/index";
+import RequestLogger from "@middlewares/request-logger.ts";
+import ErrorHandler from "@middlewares/error-handler.ts";
+import Logger from "@services/Logger.ts";
 
 // Creating the app
 const app = express();
@@ -41,14 +45,16 @@ app.use(session({
     }
 }))
 
-app.get('/test', (req, res) => {
-    res.status(200).json({data: "This is the test route"})
-})
+// Setting Up Routes
+app.use('/api', RequestLogger(), baseRoute);
+
+// Adding an error handler
+app.use(ErrorHandler());
 
 const PORT = 3000;
 
 app.listen(PORT, () => {
-    console.log(`Server listening at http://127.0.0.1:${PORT}`);
+    Logger.LogMessage(`Server listening at http://127.0.0.1:${PORT}`);
 })
 
 export default app;

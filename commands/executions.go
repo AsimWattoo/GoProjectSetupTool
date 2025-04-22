@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 )
 
 var GlobalExecutions = map[string]func(args []string) error{
@@ -39,7 +40,24 @@ var GlobalExecutions = map[string]func(args []string) error{
 			return fmt.Errorf("Error reading file. Error: %s", err)
 		}
 
-		writeErr := os.WriteFile(args[1], content, 0644)
+		contentStr := string(content)
+
+		if len(args) > 2 {
+			for i := 2; i < len(args); i += 1 {
+				command := args[i]
+
+				if command == "--replace" {
+					oldText := args[i+1]
+					newText := args[i+2]
+
+					contentStr = strings.ReplaceAll(contentStr, oldText, newText)
+
+					i += 2
+				}
+			}
+		}
+
+		writeErr := os.WriteFile(args[1], []byte(contentStr), 0644)
 
 		if writeErr != nil {
 			return fmt.Errorf("Error writing to file. Error: %s", err)
@@ -53,8 +71,6 @@ var GlobalExecutions = map[string]func(args []string) error{
 		}
 
 		jsonPath := args[0]
-		block := args[1]
-		data := args[2]
 
 		jsonContent, err := os.ReadFile(jsonPath)
 
@@ -68,20 +84,28 @@ var GlobalExecutions = map[string]func(args []string) error{
 			return fmt.Errorf("Error parsing json file. Error: %s", unMarshalErr)
 		}
 
-		blockData := map[string]string{}
+		for i := 1; i < len(args); i += 1 {
+			if args[i] == "--data" {
+				block := args[i+1]
+				data := args[i+2]
+				blockData := map[string]string{}
 
-		if jsonParseErr := json.Unmarshal([]byte(data), &blockData); jsonParseErr != nil {
-			return fmt.Errorf("Error parsing data: %v", jsonParseErr)
-		}
+				if jsonParseErr := json.Unmarshal([]byte(data), &blockData); jsonParseErr != nil {
+					return fmt.Errorf("Error parsing data: %v", jsonParseErr)
+				}
 
-		if jsonData[block] == nil {
-			jsonData[block] = blockData
-		} else {
-			existingData := jsonData[block].(map[string]interface{})
-			for key, value := range blockData {
-				existingData[key] = value
+				if jsonData[block] == nil {
+					jsonData[block] = blockData
+				} else {
+					existingData := jsonData[block].(map[string]interface{})
+					for key, value := range blockData {
+						existingData[key] = value
+					}
+					jsonData[block] = existingData
+				}
+
+				i += 2
 			}
-			jsonData[block] = existingData
 		}
 
 		updatedJson, err := json.MarshalIndent(jsonData, "", "  ")
