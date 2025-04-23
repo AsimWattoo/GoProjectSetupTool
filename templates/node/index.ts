@@ -9,8 +9,10 @@ import session from "express-session";
 import path from "path";
 import baseRoute from "@routes/index";
 import RequestLogger from "@middlewares/request-logger.ts";
+import RateLimiter from "@middlewares/rate-limiter.ts";
 import ErrorHandler from "@middlewares/error-handler.ts";
 import Logger from "@services/Logger.ts";
+import config from '@/settings/config';
 
 // Creating the app
 const app = express();
@@ -27,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Setting Up CORS
+Logger.LogImportant(`Setting CORS Origins to ${config.ORIGINS.join(', ')}`)
 app.use(cors({origin: [], credentials: true}))
 
 // Setting Up Sessions
@@ -46,15 +49,13 @@ app.use(session({
 }))
 
 // Setting Up Routes
-app.use('/api', RequestLogger(), baseRoute);
+app.use('/api', RequestLogger(), RateLimiter(), baseRoute);
 
 // Adding an error handler
 app.use(ErrorHandler());
 
-const PORT = 3000;
-
-app.listen(PORT, () => {
-    Logger.LogMessage(`Server listening at http://127.0.0.1:${PORT}`);
+app.listen(config.PORT, () => {
+    Logger.LogMessage(`Server listening at http://127.0.0.1:${config.PORT}`);
 })
 
 export default app;

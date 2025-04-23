@@ -10,7 +10,7 @@ import (
 func ShowMainMenu() {
 	mainMenu := []utils.MenuOption{
 		{Name: "1. Create Project", Handler: createProjectHandler},
-		{Name: "2. Delete Project", Handler: deleteProject},
+		{Name: "2. Clean Playground", Handler: deleteProject},
 		{Name: "3. Exit", Handler: exitHandler},
 	}
 
@@ -20,7 +20,8 @@ func ShowMainMenu() {
 func createProjectHandler() bool {
 	projectsMenu := []utils.MenuOption{
 		{Name: "1. Create Node Ts Project", Handler: CreateNodeTsProject},
-		{Name: "2. Exit", Handler: exitHandler},
+		{Name: "2. Create React + Vite + TS + Tailwind Project", Handler: CreateViteTsProject},
+		{Name: "3. Exit", Handler: exitHandler},
 	}
 
 	utils.MenuLoop(projectsMenu)
@@ -28,19 +29,23 @@ func createProjectHandler() bool {
 }
 
 func deleteProject() bool {
-	directoryPath := filepath.Join(playground, projectDir)
 
-	if _, err := os.Stat(directoryPath); os.IsNotExist(err) {
-		fmt.Println("Project directory does not exist.")
+	entries, err := os.ReadDir(playground)
+	if err != nil {
+		fmt.Println("Error reading playground directory:", err)
 		return true
 	}
 
-	if err := os.RemoveAll(directoryPath); err != nil {
-		fmt.Println("Error deleting project directory:", err)
-		return true
+	for _, entry := range entries {
+		path := filepath.Join(playground, entry.Name())
+		err := os.RemoveAll(path)
+		if err != nil {
+			fmt.Println("Error deleting directory:", err)
+			return true
+		}
 	}
 
-	fmt.Println("Project deleted successfully.")
+	fmt.Println("Playground Cleared Successfully.")
 	return true
 }
 
