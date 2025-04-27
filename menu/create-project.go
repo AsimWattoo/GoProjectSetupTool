@@ -4,8 +4,25 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"tool/node-backend-project/commands"
 )
+
+func getExecutableDir() (string, error) {
+	exePath, err := os.Executable()
+	if err != nil {
+		return "", err
+	}
+	exeDir := filepath.Dir(exePath)
+
+	tempDir := os.TempDir()
+
+	if strings.HasPrefix(exeDir, tempDir) {
+		return os.Getwd()
+	}
+
+	return exeDir, nil
+}
 
 func CreateNodeTsProject() bool {
 
@@ -19,7 +36,8 @@ func CreateNodeTsProject() bool {
 	}
 
 	directoryPath := filepath.Join(projectName)
-	rootDir, getWdErr := os.Getwd()
+
+	rootDir, getWdErr := getExecutableDir()
 
 	if getWdErr != nil {
 		fmt.Printf("Error getting the current directory. Error: %s\n", getWdErr)
@@ -85,7 +103,7 @@ func CreateViteTsProject() bool {
 		return true
 	}
 
-	rootDir, getWdErr := os.Getwd()
+	rootDir, getWdErr := getExecutableDir()
 
 	if getWdErr != nil {
 		fmt.Printf("Error getting the current directory. Error: %s\n", getWdErr)
