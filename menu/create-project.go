@@ -7,8 +7,6 @@ import (
 	"tool/node-backend-project/commands"
 )
 
-var playground string = "playground"
-
 func CreateNodeTsProject() bool {
 
 	fmt.Printf("Enter name of the project: ")
@@ -20,7 +18,7 @@ func CreateNodeTsProject() bool {
 		return true
 	}
 
-	directoryPath := filepath.Join(playground, projectName)
+	directoryPath := filepath.Join(projectName)
 	rootDir, getWdErr := os.Getwd()
 
 	if getWdErr != nil {
@@ -87,7 +85,6 @@ func CreateViteTsProject() bool {
 		return true
 	}
 
-	directoryPath := playground
 	rootDir, getWdErr := os.Getwd()
 
 	if getWdErr != nil {
@@ -97,7 +94,6 @@ func CreateViteTsProject() bool {
 
 	executor := commands.NewCommandExecutor()
 
-	executor.AddCommand("cd", directoryPath)
 	executor.AddRawCommand("npm", "create", "vite@latest", projectName, "--", "--template", "react-ts")
 	executor.AddCommand("cd", projectName)
 	executor.AddRawCommand("npm", "install")

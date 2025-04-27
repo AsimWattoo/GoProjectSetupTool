@@ -2,15 +2,13 @@ package menu
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
 	"tool/node-backend-project/utils"
 )
 
 func ShowMainMenu() {
 	mainMenu := []utils.MenuOption{
 		{Name: "1. Create Project", Handler: createProjectHandler},
-		{Name: "2. Clean Playground", Handler: deleteProject},
+		// {Name: "2. Clean Playground", Handler: deleteProject},
 		{Name: "3. Exit", Handler: exitHandler},
 	}
 
@@ -28,26 +26,26 @@ func createProjectHandler() bool {
 	return true
 }
 
-func deleteProject() bool {
+// func deleteProject() bool {
 
-	entries, err := os.ReadDir(playground)
-	if err != nil {
-		fmt.Println("Error reading playground directory:", err)
-		return true
-	}
+// 	entries, err := os.ReadDir(playground)
+// 	if err != nil {
+// 		fmt.Println("Error reading playground directory:", err)
+// 		return true
+// 	}
 
-	for _, entry := range entries {
-		path := filepath.Join(playground, entry.Name())
-		err := os.RemoveAll(path)
-		if err != nil {
-			fmt.Println("Error deleting directory:", err)
-			return true
-		}
-	}
+// 	for _, entry := range entries {
+// 		path := filepath.Join(playground, entry.Name())
+// 		err := os.RemoveAll(path)
+// 		if err != nil {
+// 			fmt.Println("Error deleting directory:", err)
+// 			return true
+// 		}
+// 	}
 
-	fmt.Println("Playground Cleared Successfully.")
-	return true
-}
+// 	fmt.Println("Playground Cleared Successfully.")
+// 	return true
+// }
 
 func exitHandler() bool {
 	fmt.Println("Exiting...")
