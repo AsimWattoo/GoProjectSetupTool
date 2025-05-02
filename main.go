@@ -1,9 +1,9 @@
 package main
 
 import (
-	"tool/node-backend-project/menu"
+	"tool/node-backend-project/projectmenu"
 )
 
 func main() {
-	menu.ShowMainMenu()
+	projectmenu.ShowMainMenu()
 }

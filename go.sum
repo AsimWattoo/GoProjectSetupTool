@@ -1,3 +1,5 @@
+github.com/AsimWattoo/git-utilities v0.0.0-20250502120059-ca0d95155150 h1:97J39kgOEFAf3FYl3/Gl22p3GKqXkvuIUsIs6VC03dM=
+github.com/AsimWattoo/git-utilities v0.0.0-20250502120059-ca0d95155150/go.mod h1:NKdbqdT3MWJa2KTiD/AO9jXOsFm7ghkNA/cuUd+slqw=
 golang.org/x/sys v0.32.0 h1:s77OFDvIQeibCmezSnk/q6iAfkdiQaJi4VzroCFrN20=
 golang.org/x/sys v0.32.0/go.mod h1:BJP2sWEmIv4KK5OTEluFJCKSidICx8ciO85XgH3Ak8k=
 golang.org/x/term v0.31.0 h1:erwDkOK1Msy6offm1mOgvspSkslFnIGsFnxOKoufg3o=

@@ -1,28 +1,29 @@
-package menu
+package projectmenu
 
 import (
 	"fmt"
-	"tool/node-backend-project/utils"
+
+	"github.com/AsimWattoo/git-utilities/menu"
 )
 
 func ShowMainMenu() {
-	mainMenu := []utils.MenuOption{
+	mainMenu := []menu.MenuOption{
 		{Name: "1. Create Project", Handler: createProjectHandler},
 		// {Name: "2. Clean Playground", Handler: deleteProject},
-		{Name: "3. Exit", Handler: exitHandler},
+		{Name: "2. Exit", Handler: exitHandler},
 	}
 
-	utils.MenuLoop(mainMenu)
+	menu.MenuLoop(mainMenu)
 }
 
 func createProjectHandler() bool {
-	projectsMenu := []utils.MenuOption{
+	projectsMenu := []menu.MenuOption{
 		{Name: "1. Create Node Ts Project", Handler: CreateNodeTsProject},
 		{Name: "2. Create React + Vite + TS + Tailwind Project", Handler: CreateViteTsProject},
 		{Name: "3. Exit", Handler: exitHandler},
 	}
 
-	utils.MenuLoop(projectsMenu)
+	menu.MenuLoop(projectsMenu)
 	return true
 }
 

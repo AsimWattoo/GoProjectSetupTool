@@ -1,11 +1,12 @@
-package menu
+package projectmenu
 
 import (
 	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
-	"tool/node-backend-project/commands"
+
+	"github.com/AsimWattoo/git-utilities/command"
 )
 
 func getExecutableDir() (string, error) {
@@ -44,7 +45,7 @@ func CreateNodeTsProject() bool {
 		return true
 	}
 
-	executor := commands.NewCommandExecutor()
+	executor := command.NewCommandExecutor()
 
 	executor.AddCommand("mkdir", directoryPath, "0755")
 	executor.AddCommand("cd", directoryPath)
@@ -110,7 +111,7 @@ func CreateViteTsProject() bool {
 		return true
 	}
 
-	executor := commands.NewCommandExecutor()
+	executor := command.NewCommandExecutor()
 
 	executor.AddRawCommand("npm", "create", "vite@latest", projectName, "--", "--template", "react-ts")
 	executor.AddCommand("cd", projectName)
