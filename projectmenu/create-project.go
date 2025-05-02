@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/AsimWattoo/git-utilities/command"
+	"github.com/AsimWattoo/go-utilities/command"
 )
 
 func getExecutableDir() (string, error) {

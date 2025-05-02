@@ -3,7 +3,7 @@ package projectmenu
 import (
 	"fmt"
 
-	"github.com/AsimWattoo/git-utilities/menu"
+	"github.com/AsimWattoo/go-utilities/menu"
 )
 
 func ShowMainMenu() {
