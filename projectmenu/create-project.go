@@ -208,6 +208,7 @@ func CreateNodeLibraryProject() bool {
     executor.AddCommand("cp", filepath.Join(rootDir, "templates/library/vite.config.ts"), "vite.config.ts", "--replace", "// @ts-nocheck", "", "--replace", "<PACKAGE_NAME>", lowercasePackageName);
     executor.AddCommand("cp", filepath.Join(rootDir, "templates/library/.gitignore"), ".gitignore")
     executor.AddCommand("cp", filepath.Join(rootDir, "templates/library/.env"), ".env")
+    executor.AddCommand("cp", filepath.Join(rootDir, "templates/library/.npmrc"), ".npmrc")
 
     executor.AddCommand("cd", rootDir)
 
