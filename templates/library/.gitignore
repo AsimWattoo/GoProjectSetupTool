@@ -1,0 +1,10 @@
+node_modules
+package-lock.json
+.env
+.env.production
+uploads
+temp
+yarn.lock
+dist
+coverage
+.idea

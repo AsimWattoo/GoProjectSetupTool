@@ -1,6 +1,16 @@
 github.com/AsimWattoo/go-utilities v0.0.0-20250502133841-39eebbe3e249 h1:abl8E8A27F/jB/KQPKpR3kKESkvBIzOHIjJ/Yqkh5Lg=
 github.com/AsimWattoo/go-utilities v0.0.0-20250502133841-39eebbe3e249/go.mod h1:lHMtpqsvR7lg7UBT4KH/J9PuUjU2pKMbTNqbqzu53hg=
+github.com/AsimWattoo/go-utilities v0.0.0-20250701044142-a66f54d1817c h1:dXz9eUXchMHhdTEzaTMppRQ4GQusqgs4qmfvxy2kqjM=
+github.com/AsimWattoo/go-utilities v0.0.0-20250701044142-a66f54d1817c/go.mod h1:AMVu2/Wfx9Cm9MB6OPMmSHwxwg6wj8NSOQXMc7vTRcM=
+github.com/AsimWattoo/go-utilities v0.0.0-20250701044740-24d646ecc54b h1:Q6tndqrlQjkWzb7BEKXTDh5+LqVBQZA5BgiYtj09TzA=
+github.com/AsimWattoo/go-utilities v0.0.0-20250701044740-24d646ecc54b/go.mod h1:AMVu2/Wfx9Cm9MB6OPMmSHwxwg6wj8NSOQXMc7vTRcM=
+github.com/AsimWattoo/go-utilities v0.0.0-20250701050544-292edcb52017 h1:7l51Wa7aX4pAisPBcFeMYPIprhvCKapOZwOHiKHo1gk=
+github.com/AsimWattoo/go-utilities v0.0.0-20250701050544-292edcb52017/go.mod h1:AMVu2/Wfx9Cm9MB6OPMmSHwxwg6wj8NSOQXMc7vTRcM=
 golang.org/x/sys v0.32.0 h1:s77OFDvIQeibCmezSnk/q6iAfkdiQaJi4VzroCFrN20=
 golang.org/x/sys v0.32.0/go.mod h1:BJP2sWEmIv4KK5OTEluFJCKSidICx8ciO85XgH3Ak8k=
+golang.org/x/sys v0.33.0 h1:q3i8TbbEz+JRD9ywIRlyRAQbM0qF7hu24q3teo2hbuw=
+golang.org/x/sys v0.33.0/go.mod h1:BJP2sWEmIv4KK5OTEluFJCKSidICx8ciO85XgH3Ak8k=
 golang.org/x/term v0.31.0 h1:erwDkOK1Msy6offm1mOgvspSkslFnIGsFnxOKoufg3o=
 golang.org/x/term v0.31.0/go.mod h1:R4BeIy7D95HzImkxGkTW1UQTtP54tio2RyHz7PwK0aw=
+golang.org/x/term v0.32.0 h1:DR4lr0TjUs3epypdhTOkMmuF5CDFJ/8pOnbzMZPQ7bg=
+golang.org/x/term v0.32.0/go.mod h1:uZG1FhGx848Sqfsq4/DlJr3xGGsYMu/L5GW4abiaEPQ=

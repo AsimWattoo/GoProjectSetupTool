@@ -1,0 +1,5 @@
+function initializeModule() {}
+
+export {
+    initializeModule,
+}

@@ -20,6 +20,7 @@ func createProjectHandler() bool {
 	projectsMenu := []menu.MenuOption{
 		{Name: "1. Create Node Ts Project", Handler: CreateNodeTsProject},
 		{Name: "2. Create React + Vite + TS + Tailwind Project", Handler: CreateViteTsProject},
+		{Name: "3. Create Node + TS + Vite + Vitest Library Project", Handler: CreateNodeLibraryProject},
 		{Name: "3. Exit", Handler: exitHandler},
 	}
 
