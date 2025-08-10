@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite'
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
+import { builtinModules } from "node:module"
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -34,6 +35,12 @@ export default defineConfig({
         },
         emptyOutDir: true,
         sourcemap: true,
+        rollupOptions: {
+            external: [
+                ...builtinModules,
+                ...builtinModules.map(b => `node:${b}`)
+            ]
+        }
     },
     resolve: {
         alias: {
